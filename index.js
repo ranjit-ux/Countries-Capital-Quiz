@@ -10,10 +10,12 @@ const port = process.env.PORT || 3000;
 
 const isProduction = process.env.NODE_ENV === "production";
 
-const db=new pg.Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: isProduction ? {
-        rejectUnauthorized: false} : false,
+const db = new pg.Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
 });
 
 db.connect()
